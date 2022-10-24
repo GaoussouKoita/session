@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css"/>
+    <script th:src="@{/js/jQuery.min.js}"></script>
+    <script th:src="@{/js/popper.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+    <title>Gestion Utilisateur</title>
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="row">
+        <nav class="navbar navbar-default">
+            <ul class="nav navbar-nav pull-right" sec:authorize="isAuthenticated()">
+
+                <li class="dropdown pull-right ">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="text-inline" th:text="${currentUtilisateur.prenom}+' '
+                            +${currentUtilisateur.nom}"></span></a>
+
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a th:href="@{/password}">Changer Password
+                            </a></li>
+                        <li>
+                            <form method="post" th:action="@{/logout}" th:hiden="true">
+                                <button class="btn btn-link"><span class="glyphicon glyphicon-log-out"></span>
+                                    <span class="text-danger">Deconnexion</span></button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="dropdown">
+
+                    <ul class="dropdown-menu">
+                        <li class="dropdown"><a th:href="@{/utilisateur/password}">Changer Password</a></li>
+                        <li class="dropdown">
+
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">Ajout et Update de Utilisateur</h2>
+                </div>
+
+                <form class="form-horizontal" method="POST" th:action="@{/utilisateur/add}"
+                      th:object="${utilisateur}">
+
+                    <div class="panel-body">
+                        <input class="form-control" th:field="*{id}" type="hidden"/>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Nom</label>
+                            <div class="col-md-10">
+                                <input class="form-control" required th:field="*{nom}" type="text"/>
+                                <span class="text-danger" th:errors="*{nom}"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Prenom</label>
+                            <div class="col-md-10">
+                                <input class="form-control" required th:field="*{prenom}" type="text"/>
+                                <span class="text-danger" th:errors="*{prenom}"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Adresse</label>
+                            <div class="col-md-10">
+                                <input class="form-control" required th:field="*{adresse}" type="text"/>
+                                <span class="text-danger" th:errors="*{adresse}"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Telephone</label>
+                            <div class="col-md-10">
+                                <input class="form-control" required th:field="*{telephone}" type="text"/>
+                                <span class="text-danger" th:errors="*{telephone}"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Email</label>
+                            <div class="col-md-10">
+                                <input class="form-control" required th:field="*{email}" type="text"/>
+                                <span class="text-danger" th:errors="*{email}"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Password</label>
+                            <div class="col-md-10">
+                                <input class="form-control" required th:field="*{password}" type="password"/>
+                                <span class="text-danger" th:errors="*{password}"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Confirmation</label>
+                            <div class="col-md-10">
+                                <input class="form-control" required th:field="*{confirmation}" type="password"/>
+                                <span class="text-danger" th:errors="*{confirmation}"></span></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Roles</label>
+                            <div class="col-md-10">
+                                <th:block th:each="role : ${roles}">
+                                    <div>
+                                        <input class="margin-left-md" th:field="*{roles}" th:text=" ${role.roleName}"
+                                               th:value="${role.id}" type="checkbox"/>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="panel-footer">
+                        <div class="text-center">
+                            <button class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">Liste des Utilisateurs</h2>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Prenom</th>
+                            <th>Nom</th>
+                            <th>Adresse</th>
+                            <th>Telephone</th>
+                            <th>Email</th>
+                            <th>Roles</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        <tr th:each="utilisateur : ${ utilisateurs }">
+                            <td th:text="${ utilisateur.prenom }"></td>
+                            <td th:text="${ utilisateur.nom }"></td>
+                            <td th:text="${ utilisateur.adresse }"></td>
+                            <td th:text="${ utilisateur.telephone }"></td>
+                            <td th:text="${ utilisateur.email }"></td>
+                            <td>
+                                <th:bloc th:each="r : ${utilisateur.roles}">
+                                    <span th:text="${r.roleName}"></span>
+                                </th:bloc>
+                            </td>
+
+                            <td>
+                                <button class="btn btn-info">
+                                    <a th:href="@{/utilisateur/update(id=${utilisateur.id})}"><span
+                                            class="glyphicon glyphicon-pencil "></span></a>
+                                </button>
+                                <button class="btn btn-danger">
+                                    <a onclick="return confirm('Etes-vous sur?')"
+                                       th:href="@{/utilisateur/delete(id=${utilisateur.id})}"><span
+                                            class="glyphicon glyphicon-trash "></span></a>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="text-right">
+                <ul class="pagination" th:if="${totalElements} > 5 ">
+                    <li th:classappend="${currentPage}==${status.index}?'active':''" th:each=" page, status:${pages}">
+                        <a th:href="@{/utilisateur/add(page=${status.index})}" th:text="${status.index+1}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

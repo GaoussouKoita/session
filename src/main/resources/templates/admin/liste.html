@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <style th:replace="fragment/style"></style>
+
+    <title>Dashboard</title>
+
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <div th:replace="fragment/navbar-horizontal"></div>
+    <div th:replace="fragment/navbar-vertical"></div>
+
+    <div class="content-wrapper">
+        <div th:replace="fragment/table"></div>
+    </div>
+
+    <div th:replace="fragment/footer"></div>
+
+</div>
+</body>
+<script th:replace="fragment/script"></script>
+</html>

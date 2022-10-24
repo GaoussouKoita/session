@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <style th:replace="fragment/style"></style>
+    <title>Liste documents</title>
+</head>
+<body class="hold-transition sidebar-mini ">
+<div class="wrapper">
+    <div th:replace="fragment/navbar-horizontal"></div>
+    <div th:replace="fragment/navbar-vertical"></div>
+
+    <div class="content-wrapper">
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 my-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Liste des Documents</h3>
+                                <div class="card-tools">
+                                    <div class="input-group input-group-sm">
+                                        <input class="form-control float-right" name="table_search"
+                                               placeholder="Search"
+                                               type="text">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-default" type="submit">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+
+                                        <button class="btn btn-tool" data-card-widget="collapse" title="Collapse"
+                                                type="button">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <button class="btn btn-tool" data-card-widget="remove" title="Remove"
+                                                type="button">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Type</th>
+                                        <th>Taille</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="file : ${documents}">
+                                        <td th:text="${file.nom}"></td>
+
+                                        <td th:text="${file.type}"></td>
+                                        <td><a th:href="@{/document/download/}+''+${file.id}"><i
+                                                class="fas fa-download"></i> Download</a></td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div th:replace="fragment/footer"></div>
+</div>
+</body>
+<script th:replace="fragment/script"></script>
+</html>

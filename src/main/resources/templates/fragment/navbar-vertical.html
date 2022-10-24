@@ -1,0 +1,78 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="info">
+                <a href="#" class="d-block">Gestion App</a>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                <li class="nav-header">Nom Header</li>
+                <li class="nav-item">
+                    <a  th:href="@{/dashboard}" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Acceuil
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a h th:href="@{/dashboard}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Formulaire</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a  th:href="@{/dashboard/liste}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Table</p>
+                            </a>
+                        </li><li class="nav-item">
+                            <a  th:href="@{/dashboard/login}" class="nav-link">
+                                <i class="far fa-sign-in-alt nav-icon"></i>
+                                <p>Login</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>Utilisateur
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a class="nav-link"  th:href="@{/utilisateur/add}">
+                                <i class="fas fa-user-plus"></i>
+                                <p>Nouveau</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  th:href="@{/}">
+                                <i class="fas fa-users"></i>
+                                <p>Liste</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="nav-header">Nom Header</li>
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
